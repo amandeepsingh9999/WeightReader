@@ -9,8 +9,10 @@ if (!(Test-Path ".git")) {
 # Save current commit (rollback point)
 $rollbackCommit = git rev-parse HEAD
 
+git stash
 git fetch origin
 git pull origin main
+git stash pop
 
 if ($LASTEXITCODE -ne 0) {
     Write-Host "⚠️ Update failed, rolling back..." -ForegroundColor Yellow
